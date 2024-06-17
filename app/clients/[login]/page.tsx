@@ -1,18 +1,23 @@
-import { Client } from "../types";
+import { Client } from "@/app/types";
 
-async function getAllClients() {
-  const res = await fetch("http://localhost:3500/clients", {
+async function getClientsByUser(login: string) {
+  const res = await fetch(`http://localhost:3500/clients/${login}`, {
     next: {
       revalidate: 0,
     },
   });
   return res.json();
 }
-export default async function ClientsList() {
-  const clients = await getAllClients();
-  console.log("clients", clients);
+
+export default async function ClientsListByUser({
+  params,
+}: {
+  params: { login: string };
+}) {
+  const clients = await getClientsByUser(params.login as string);
   return (
-    <>
+    <div>
+      <h2>Clients </h2>
       {clients.map((client: Client) => (
         <div key={client._id}>
           <div>{client.account_number}</div>
@@ -25,6 +30,6 @@ export default async function ClientsList() {
           <div>{client.status}</div>
         </div>
       ))}
-    </>
+    </div>
   );
 }

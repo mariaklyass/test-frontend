@@ -1,1 +1,3 @@
-export default async function Registration() {}
+export default async function Registration() {
+  return <h1>Registration</h1>;
+}
