@@ -1,5 +1,3 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
-
 ## Стажировка в АТОН (Fullstack-разработчик)
 
 ### Задание
@@ -30,13 +28,16 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 ### Технологический стек
 
 **Фронтенд**
+![frontend](<img width="200px" src="https://github.com/mariaklyass/test-frontend/assets/110608602/4fba2636-8110-4d8a-9ed4-eb6c29781d76"/>)
 
 **Бекенд**
 github:
 https://github.com/mariaklyass/test-api
+![backend](https://github.com/mariaklyass/test-frontend/assets/110608602/ed71efb5-073e-4452-b4d8-863f2348e8d4)
 
 **БД**
 MongoDB
+![DB](https://github.com/mariaklyass/test-frontend/assets/110608602/71fcd955-0252-419f-bb16-286cc350f64f)
 
 ### Деплой
 
@@ -48,8 +49,7 @@ https://aton-internship-api.onrender.com/
 
 База Railway
 
-[коллекция постман для тестирования API]
-(https://bold-sunset-137189.postman.co/workspace/Team-Workspace~683cfb31-a2b2-4a07-8367-ef04467bf6de/collection/32670769-8cf7c849-bba3-452b-94c4-ba999f9c76fb?action=share&creator=32670769)
+[Коллекция Постман для тестирования API](https://bold-sunset-137189.postman.co/workspace/Team-Workspace~683cfb31-a2b2-4a07-8367-ef04467bf6de/collection/32670769-8cf7c849-bba3-452b-94c4-ba999f9c76fb?action=share&creator=32670769)
 
 ### Локальная сборка
 
@@ -61,12 +61,12 @@ https://aton-internship-api.onrender.com/
 
 ### ToDo список
 
-- создание нового пользователя
-- валидация на клиенте
-- шифрование пароля
+- ~~создание нового пользователя~~
+- ~~валидация на клиенте~~
+- ~~шифрование пароля~~
 - изменение пароля через ФИО
-- сортировка, поиск
+- ~~сортировка, поиск~~
 - аутентификация (JWT)
 - роли (просмотр всех пользователей, переназначение отвественного лица Администратором, управление учетными записями и тд)
-- адаптивный дизайн
+- ~~адаптивный дизайн~~
 - тесты
