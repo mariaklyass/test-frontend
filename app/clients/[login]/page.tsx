@@ -28,7 +28,7 @@ export default async function ClientsListByUser({
       {clients.length > 0 ? (
         <>
           <ClientsList clients={clients} />
-          <p>
+          <p className="pl-8">
             Текущий пользователь: <i>{params.login}</i>
           </p>
         </>

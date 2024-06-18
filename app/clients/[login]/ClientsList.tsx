@@ -107,11 +107,13 @@ export default function ClientsList({ clients }: { clients: Client[] }) {
   };
 
   return (
-    <div className="overflow-x-auto">
-      <h1 className="text-center">Здравствуйте, {responsiblePersonName}!</h1>
-      <h2 className="text-center">Список клиентов</h2>
+    <div className="overflow-x-auto p-8">
+      <h1 className="text-center mb-4">
+        Здравствуйте, {responsiblePersonName}!
+      </h1>
+      <h2 className="text-center mb-4 uppercase">Список клиентов</h2>
 
-      <div className="mb-4">
+      <div className="mb-4 flex justify-center">
         <input
           type="text"
           value={searchQuery}
@@ -120,58 +122,79 @@ export default function ClientsList({ clients }: { clients: Client[] }) {
           className="border rounded p-2 text-black"
         />
       </div>
-      <table className="min-w-full ">
-        <thead>
-          <tr>
+      <table className="min-w-full border-collapse block md:table">
+        <thead className="hidden md:table-header-group">
+          <tr className="block md:table-row">
             <th
-              className="px-4 py-2 cursor-pointer"
+              className="px-4 py-2 cursor-pointer block md:table-cell"
               onClick={() => handleSortChange("account_number")}
             >
               Номер счета
             </th>
             <th
-              className="px-4 py-2 cursor-pointer"
+              className="px-4 py-2 cursor-pointer block md:table-cell"
               onClick={() => handleSortChange("last_name")}
             >
               Фамилия
             </th>
             <th
-              className="px-4 py-2 cursor-pointer"
+              className="px-4 py-2 cursor-pointer block md:table-cell"
               onClick={() => handleSortChange("first_name")}
             >
               Имя
             </th>
             <th
-              className="px-4 py-2 cursor-pointer"
+              className="px-4 py-2 cursor-pointer block md:table-cell"
               onClick={() => handleSortChange("middle_name")}
             >
               Отчество
             </th>
-            <th className="px-4 py-2">Дата рождения</th>
-            <th className="px-4 py-2">ИНН</th>
+            <th className="px-4 py-2 block md:table-cell">Дата рождения</th>
+            <th className="px-4 py-2 block md:table-cell">ИНН</th>
             {/* <th className="px-4 py-2">Responsible Person</th> */}
             <th
-              className="px-4 py-2 cursor-pointer"
+              className="px-4 py-2 cursor-pointer block md:table-cell"
               onClick={() => handleSortChange("status")}
             >
               Статус
             </th>
           </tr>
         </thead>
-        <tbody>
+        <tbody className="block md:table-row-group">
           {filteredClients.length > 0 ? (
             filteredClients.map((client: Client) => (
-              <tr key={client._id}>
-                <td className="border px-4 py-2">{client.account_number}</td>
-                <td className="border px-4 py-2">{client.last_name}</td>
-                <td className="border px-4 py-2">{client.first_name}</td>
-                <td className="border px-4 py-2">{client.middle_name}</td>
-                <td className="border px-4 py-2">{client.birthdate}</td>
-                <td className="border px-4 py-2">{client.inn}</td>
-                <td className="border px-4 py-2">
-                  {client.responsible_person}
+              <tr
+                key={client._id}
+                className="block md:table-row mb-4 md:mb-0 border md:border-0"
+              >
+                <td className="border-t border-l border-r md:border border-gray-300 px-4 py-2 block md:table-cell">
+                  <span className="md:hidden font-semibold">Номер счета: </span>
+                  {client.account_number}
                 </td>
-                <td className="border px-4 py-2">
+                <td className="border-t border-l border-r md:border border-gray-300 px-4 py-2 block md:table-cell">
+                  <span className="md:hidden font-semibold">Фамилия: </span>
+                  {client.last_name}
+                </td>
+                <td className="border-t border-l border-r md:border border-gray-300 px-4 py-2 block md:table-cell">
+                  <span className="md:hidden font-semibold">Имя: </span>
+                  {client.first_name}
+                </td>
+                <td className="border-t border-l border-r md:border border-gray-300 px-4 py-2 block md:table-cell">
+                  <span className="md:hidden font-semibold">Отчество: </span>
+                  {client.middle_name}
+                </td>
+                <td className="border-t border-l border-r md:border border-gray-300 px-4 py-2 block md:table-cell">
+                  <span className="md:hidden font-semibold">
+                    Дата рождения:{" "}
+                  </span>
+                  {client.birthdate}
+                </td>
+                <td className="border-t border-l border-r md:border border-gray-300 px-4 py-2 block md:table-cell">
+                  <span className="md:hidden font-semibold">ИНН: </span>
+                  {client.inn}
+                </td>
+                <td className="border-t border-l border-r md:border border-gray-300 px-4 py-2 block md:table-cell">
+                  <span className="md:hidden font-semibold">Статус: </span>
                   <span
                     style={{
                       display: "inline-block",
@@ -200,10 +223,10 @@ export default function ClientsList({ clients }: { clients: Client[] }) {
               </tr>
             ))
           ) : (
-            <tr>
-              <td colSpan={8} className="text-center py-4">
+            <tr className="block md:table-row">
+              <td colSpan={8} className="text-center py-4 block md:table-cell">
                 {searchQuery
-                  ? "К сожалению, клиентов с заданнами параметрами не найдено. Попробуйте изменить параметры поиска."
+                  ? "К сожалению, клиентов с заданными параметрами не найдено. Попробуйте изменить параметры поиска."
                   : "К сожалению, для данного пользователя нет закрепленных клиентов. Попробуйте зайти под другим логином."}
               </td>
             </tr>
