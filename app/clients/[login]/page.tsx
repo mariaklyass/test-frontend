@@ -1,4 +1,5 @@
 import { Client } from "@/app/types";
+import ClientsList from "./ClientsList";
 
 async function getClientsByUser(login: string) {
   const res = await fetch(`http://localhost:3500/clients/${login}`, {
@@ -18,23 +19,8 @@ export default async function ClientsListByUser({
 
   return (
     <div>
-      <h2>Clients </h2>
-      {clients.length > 0 ? (
-        clients.map((client: Client) => (
-          <div key={client._id}>
-            <div>Account Number: {client.account_number}</div>
-            <div>Last Name: {client.last_name}</div>
-            <div>First Name: {client.first_name}</div>
-            <div>Middle Name: {client.middle_name}</div>
-            <div>Birthdate: {client.birthdate}</div>
-            <div>INN: {client.inn}</div>
-            <div>Responsible Person: {client.responsible_person}</div>
-            <div>Status: {client.status}</div>
-          </div>
-        ))
-      ) : (
-        <p>There are no clients for you.</p>
-      )}
+      <h2 className="text-center">Список клиентов</h2>
+      <ClientsList clients={clients} />
     </div>
   );
 }
