@@ -16,3 +16,7 @@ export interface Client {
   responsible_person: string;
   status: string;
 }
+
+export interface ErrorResponse {
+  message: string;
+}

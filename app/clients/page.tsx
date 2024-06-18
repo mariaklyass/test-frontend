@@ -8,23 +8,27 @@ async function getAllClients() {
   });
   return res.json();
 }
+
 export default async function ClientsList() {
   const clients = await getAllClients();
-  console.log("clients", clients);
+
   return (
     <>
-      {clients.map((client: Client) => (
-        <div key={client._id}>
-          <div>{client.account_number}</div>
-          <div>{client.last_name}</div>
-          <div>{client.first_name}</div>
-          <div>{client.middle_name}</div>
-          <div>{client.birthdate}</div>
-          <div>{client.inn}</div>
-          <div>{client.responsible_person}</div>
-          <div>{client.status}</div>
-        </div>
-      ))}
+      <h1>Список всех клиентов. Доступен администратору.</h1>
+      <div>
+        {clients.map((client: Client) => (
+          <div key={client._id}>
+            <div>{client.account_number}</div>
+            <div>{client.last_name}</div>
+            <div>{client.first_name}</div>
+            <div>{client.middle_name}</div>
+            <div>{client.birthdate}</div>
+            <div>{client.inn}</div>
+            <div>{client.responsible_person}</div>
+            <div>{client.status}</div>
+          </div>
+        ))}
+      </div>
     </>
   );
 }
