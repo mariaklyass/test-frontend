@@ -70,13 +70,16 @@ export default function ClientsList({ clients }: { clients: Client[] }) {
     newStatus: string
   ) => {
     try {
-      const response = await fetch("http://localhost:3500/clients", {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ account_number, status: newStatus }),
-      });
+      const response = await fetch(
+        "https://aton-internship-api.onrender.com/clients",
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ account_number, status: newStatus }),
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Failed to update status");

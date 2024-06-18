@@ -2,11 +2,14 @@ import ClientsList from "./ClientsList";
 import Link from "next/link";
 
 async function getClientsByUser(login: string) {
-  const res = await fetch(`http://localhost:3500/clients/${login}`, {
-    next: {
-      revalidate: 0,
-    },
-  });
+  const res = await fetch(
+    `https://aton-internship-api.onrender.com/clients/${login}`,
+    {
+      next: {
+        revalidate: 0,
+      },
+    }
+  );
   return res.json();
 }
 

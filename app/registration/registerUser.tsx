@@ -14,13 +14,16 @@ export const schema = z.object({
 });
 
 export const createUser = async (data: Record<string, string>) => {
-  const response = await fetch("http://localhost:3500/users/register", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
-  });
+  const response = await fetch(
+    "https://aton-internship-api.onrender.com/users/register",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    }
+  );
   if (!response.ok) {
     throw new Error("Данный логин уже занят, попробуйте придумать другой.");
   }

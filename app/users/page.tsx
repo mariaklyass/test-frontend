@@ -1,7 +1,7 @@
 import { User } from "../types";
 
 async function getUsers() {
-  const res = await fetch("http://localhost:3500/users", {
+  const res = await fetch("https://aton-internship-api.onrender.com/users", {
     next: {
       revalidate: 0,
     },

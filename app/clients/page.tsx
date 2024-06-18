@@ -1,7 +1,7 @@
 import { Client } from "../types";
 
 async function getAllClients() {
-  const res = await fetch("http://localhost:3500/clients", {
+  const res = await fetch("https://aton-internship-api.onrender.com/clients", {
     next: {
       revalidate: 0,
     },
