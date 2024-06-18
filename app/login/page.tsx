@@ -40,13 +40,16 @@ export default function Login() {
     try {
       loginSchema.parse(loginData);
 
-      const response = await fetch("https://aton-internship-api.onrender.com/users/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(loginData),
-      });
+      const response = await fetch(
+        "https://aton-internship-api.onrender.com/users/login",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(loginData),
+        }
+      );
       const responseData: User | ErrorResponse = await response.json();
 
       if (!response.ok) {
