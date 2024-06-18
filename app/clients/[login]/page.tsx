@@ -18,8 +18,10 @@ export default async function ClientsListByUser({
 
   return (
     <div>
-      <h2 className="text-center">Список клиентов</h2>
       <ClientsList clients={clients} />
+      <p>
+        Текущий пользователь: <i>{params.login}</i>
+      </p>
     </div>
   );
 }

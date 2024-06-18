@@ -4,6 +4,10 @@ import { Client } from "@/app/types";
 import { useState, useEffect } from "react";
 
 export default function ClientsList({ clients }: { clients: Client[] }) {
+  const responsiblePersonName =
+    clients.find((client) => client.responsible_person)?.responsible_person ||
+    "";
+
   const [searchQuery, setSearchQuery] = useState("");
   const [sortKey, setSortKey] = useState<keyof Client | "status">(
     "account_number"
@@ -104,6 +108,9 @@ export default function ClientsList({ clients }: { clients: Client[] }) {
 
   return (
     <div className="overflow-x-auto">
+      <h1 className="text-center">Здравствуйте, {responsiblePersonName}!</h1>
+      <h2 className="text-center">Список клиентов</h2>
+
       <div className="mb-4">
         <input
           type="text"
@@ -142,7 +149,7 @@ export default function ClientsList({ clients }: { clients: Client[] }) {
             </th>
             <th className="px-4 py-2">Дата рождения</th>
             <th className="px-4 py-2">ИНН</th>
-            <th className="px-4 py-2">Responsible Person</th>
+            {/* <th className="px-4 py-2">Responsible Person</th> */}
             <th
               className="px-4 py-2 cursor-pointer"
               onClick={() => handleSortChange("status")}
