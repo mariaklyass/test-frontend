@@ -1,15 +1,65 @@
 "use client";
 
 import { Client } from "@/app/types";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function ClientsList({ clients }: { clients: Client[] }) {
+  const [searchQuery, setSearchQuery] = useState("");
+  const [sortKey, setSortKey] = useState<keyof Client | "status">(
+    "account_number"
+  );
+  const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
+  const [filteredClients, setFilteredClients] = useState<Client[]>(clients);
   const [statuses, setStatuses] = useState(
     clients.reduce((acc, client) => {
       acc[client.account_number] = client.status;
       return acc;
     }, {} as { [key: string]: string })
   );
+
+  useEffect(() => {
+    let sortedClients = [...clients];
+
+    if (searchQuery) {
+      sortedClients = sortedClients.filter(
+        (client) =>
+          client.last_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          client.first_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          client.middle_name
+            .toLowerCase()
+            .includes(searchQuery.toLowerCase()) ||
+          client.account_number.toString().includes(searchQuery.toLowerCase())
+      );
+    }
+
+    sortedClients.sort((a, b) => {
+      const aValue =
+        sortKey === "status" ? statuses[a.account_number] : a[sortKey];
+      const bValue =
+        sortKey === "status" ? statuses[b.account_number] : b[sortKey];
+
+      if (sortOrder === "asc") {
+        return aValue > bValue ? 1 : -1;
+      } else {
+        return aValue < bValue ? 1 : -1;
+      }
+    });
+
+    setFilteredClients(sortedClients);
+  }, [searchQuery, sortKey, sortOrder, clients, statuses]);
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(e.target.value);
+  };
+
+  const handleSortChange = (key: keyof Client | "status") => {
+    if (key === sortKey) {
+      setSortOrder((prevOrder) => (prevOrder === "asc" ? "desc" : "asc"));
+    } else {
+      setSortKey(key);
+      setSortOrder("asc");
+    }
+  };
 
   const handleStatusChange = async (
     account_number: number,
@@ -54,22 +104,56 @@ export default function ClientsList({ clients }: { clients: Client[] }) {
 
   return (
     <div className="overflow-x-auto">
-      <table className="min-w-full">
+      <div className="mb-4">
+        <input
+          type="text"
+          value={searchQuery}
+          onChange={handleSearchChange}
+          placeholder="Поиск..."
+          className="border rounded p-2 text-black"
+        />
+      </div>
+      <table className="min-w-full ">
         <thead>
           <tr>
-            <th className="px-4 py-2">Account Number</th>
-            <th className="px-4 py-2">Last Name</th>
-            <th className="px-4 py-2">First Name</th>
-            <th className="px-4 py-2">Middle Name</th>
-            <th className="px-4 py-2">Birthdate</th>
-            <th className="px-4 py-2">INN</th>
+            <th
+              className="px-4 py-2 cursor-pointer"
+              onClick={() => handleSortChange("account_number")}
+            >
+              Номер счета
+            </th>
+            <th
+              className="px-4 py-2 cursor-pointer"
+              onClick={() => handleSortChange("last_name")}
+            >
+              Фамилия
+            </th>
+            <th
+              className="px-4 py-2 cursor-pointer"
+              onClick={() => handleSortChange("first_name")}
+            >
+              Имя
+            </th>
+            <th
+              className="px-4 py-2 cursor-pointer"
+              onClick={() => handleSortChange("middle_name")}
+            >
+              Отчество
+            </th>
+            <th className="px-4 py-2">Дата рождения</th>
+            <th className="px-4 py-2">ИНН</th>
             <th className="px-4 py-2">Responsible Person</th>
-            <th className="px-4 py-2">Status</th>
+            <th
+              className="px-4 py-2 cursor-pointer"
+              onClick={() => handleSortChange("status")}
+            >
+              Статус
+            </th>
           </tr>
         </thead>
         <tbody>
-          {clients.length > 0 ? (
-            clients.map((client: Client) => (
+          {filteredClients.length > 0 ? (
+            filteredClients.map((client: Client) => (
               <tr key={client._id}>
                 <td className="border px-4 py-2">{client.account_number}</td>
                 <td className="border px-4 py-2">{client.last_name}</td>
@@ -111,7 +195,9 @@ export default function ClientsList({ clients }: { clients: Client[] }) {
           ) : (
             <tr>
               <td colSpan={8} className="text-center py-4">
-                There are no clients for you.
+                {searchQuery
+                  ? "К сожалению, клиентов с заданнами параметрами не найдено. Попробуйте изменить параметры поиска."
+                  : "К сожалению, для данного пользователя нет закрепленных клиентов. Попробуйте зайти под другим логином."}
               </td>
             </tr>
           )}

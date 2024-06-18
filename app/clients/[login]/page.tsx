@@ -1,4 +1,3 @@
-import { Client } from "@/app/types";
 import ClientsList from "./ClientsList";
 
 async function getClientsByUser(login: string) {
