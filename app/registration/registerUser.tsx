@@ -1,20 +1,20 @@
-// registerUser.ts
 import { z } from "zod";
 
 export const schema = z.object({
-  full_name: z
-    .string()
-    .min(1, { message: "ФИО должно содержать хотя бы один символ" }),
-  login: z
-    .string()
-    .min(4, { message: "Логин должен содержать как минимум 4 символа" }),
-  password: z
-    .string()
-    .min(6, { message: "Пароль должен содержать как минимум 6 символов" }),
+  full_name: z.string().regex(/^[\p{L}]+\s[\p{L}]+\s[\p{L}]+$/u, {
+    message: "Формат: Фамилия Имя Отчество",
+  }),
+  login: z.string().regex(/^[a-zA-Z]{5,}$/, {
+    message:
+      "Логин должен состоять только из латинских букв и быть длиной не менее 5 символов",
+  }),
+  password: z.string().min(6, {
+    message: "Пароль должен быть не менее 6 символов",
+  }),
 });
 
 export const createUser = async (data: Record<string, string>) => {
-  const response = await fetch("http://localhost:3500/users", {
+  const response = await fetch("http://localhost:3500/users/register", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -22,7 +22,7 @@ export const createUser = async (data: Record<string, string>) => {
     body: JSON.stringify(data),
   });
   if (!response.ok) {
-    throw new Error("Error creating user");
+    throw new Error("Данный логин уже занят, попробуйте придумать другой.");
   }
   const result = await response.json();
   return result;
