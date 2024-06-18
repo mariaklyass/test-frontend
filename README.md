@@ -1,36 +1,72 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+## Стажировка в АТОН (Fullstack-разработчик)
 
-First, run the development server:
+### Задание
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+1. Синтезировать данные для базы данных:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+**Таблица клиентов**
+Номер счета
+Фамилия
+Имя
+Отчество
+Дата рождения
+ИНН
+ФИО ответственного
+Статус (по умолчанию «Не в работе»)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+**Таблица пользователей**
+ФИО
+Логин
+Пароль
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+2. Создать интерфейс для обращения к синтезированным данным:
 
-## Learn More
+- Форма для авторизации по паре логин/пароль
+- После показать таблицу клиентов авторизованного пользователя по связи ФИО из таблицы пользователей – ФИО ответственного
+- Пользователь должен иметь возможность изменить статус клиента на «В работе», «Отказ», «Сделка закрыта»
 
-To learn more about Next.js, take a look at the following resources:
+### Технологический стек
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+**Фронтенд**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+**Бекенд**
+github:
+https://github.com/mariaklyass/test-api
 
-## Deploy on Vercel
+**БД**
+MongoDB
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Деплой
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Фронт Vercel:
+https://aton-internship.vercel.app/
+
+Бек Render:
+https://aton-internship-api.onrender.com/
+
+База Railway
+
+[коллекция постман для тестирования API]
+(https://bold-sunset-137189.postman.co/workspace/Team-Workspace~683cfb31-a2b2-4a07-8367-ef04467bf6de/collection/32670769-8cf7c849-bba3-452b-94c4-ba999f9c76fb?action=share&creator=32670769)
+
+### Локальная сборка
+
+`git clone`
+`npm i`
+`npm run dev`
+
+Фронтенд на порту http://localhost:3000/, бекенд на http://localhost:3500/
+
+### ToDo список
+
+- создание нового пользователя
+- валидация на клиенте
+- шифрование пароля
+- изменение пароля через ФИО
+- сортировка, поиск
+- аутентификация (JWT)
+- роли (просмотр всех пользователей, переназначение отвественного лица Администратором, управление учетными записями и тд)
+- адаптивный дизайн
+- тесты
