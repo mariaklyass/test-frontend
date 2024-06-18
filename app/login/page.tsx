@@ -33,6 +33,7 @@ export default function Login() {
     setPasswordError(null);
     setError(null);
   };
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     clearErrors();
@@ -50,11 +51,11 @@ export default function Login() {
           body: JSON.stringify(loginData),
         }
       );
+
       const responseData: User | ErrorResponse = await response.json();
 
       if (!response.ok) {
         const errorResponse = responseData as ErrorResponse;
-
         if (response.status === 401) {
           if (errorResponse.message === "Invalid login") {
             setLoginError("Неверный логин");
@@ -67,11 +68,10 @@ export default function Login() {
           throw new Error(errorResponse.message || "Неверный логин или пароль");
         }
         return;
+      } else {
+        const user = responseData as User;
+        router.push(`/clients/${user.login}`);
       }
-
-      const user: User = await response.json();
-
-      router.push(`/clients/${user.login}`);
     } catch (error) {
       if (error instanceof z.ZodError) {
         const fieldErrors = error.errors.map((err) => err.message);
@@ -82,6 +82,7 @@ export default function Login() {
         }
       } else {
         setError("Что-то сломалось.. попробуйте еще раз?");
+        console.log(error);
       }
     }
   };
