@@ -28,14 +28,20 @@
 ### Технологический стек
 
 **Фронтенд**
-![frontend](<img width="200px" src="https://github.com/mariaklyass/test-frontend/assets/110608602/4fba2636-8110-4d8a-9ed4-eb6c29781d76"/>)
+
+Саязка Next.js / TypeScript / TailwindCSS, для форм и валидации React-hook-form и Zod
+
+![frontend](https://github.com/mariaklyass/test-frontend/assets/110608602/4fba2636-8110-4d8a-9ed4-eb6c29781d76)
 
 **Бекенд**
-github:
+
+REST API на Node.js / Express
+
+код:
 https://github.com/mariaklyass/test-api
 ![backend](https://github.com/mariaklyass/test-frontend/assets/110608602/ed71efb5-073e-4452-b4d8-863f2348e8d4)
 
-**БД**
+**База Данных**
 MongoDB
 ![DB](https://github.com/mariaklyass/test-frontend/assets/110608602/71fcd955-0252-419f-bb16-286cc350f64f)
 
@@ -47,7 +53,7 @@ https://aton-internship.vercel.app/
 Бек Render:
 https://aton-internship-api.onrender.com/
 
-База Railway
+База в Railway
 
 [Коллекция Постман для тестирования API](https://bold-sunset-137189.postman.co/workspace/Team-Workspace~683cfb31-a2b2-4a07-8367-ef04467bf6de/collection/32670769-8cf7c849-bba3-452b-94c4-ba999f9c76fb?action=share&creator=32670769)
 
@@ -68,5 +74,6 @@ https://aton-internship-api.onrender.com/
 - ~~сортировка, поиск~~
 - аутентификация (JWT)
 - роли (просмотр всех пользователей, переназначение отвественного лица Администратором, управление учетными записями и тд)
+- стейт (Redux, RTK)
 - ~~адаптивный дизайн~~
 - тесты
